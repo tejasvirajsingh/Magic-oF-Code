@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hack Copy-Paste</title>
+</head>
+<body>
+  <h1>Plz Don't Copy it.</h1>
+
+  <script>
+    document.addEventListener("copy", function(event) {
+        // Stop the normal copy
+         event.preventDefault();
+      
+         // Replace copied text with custom message
+      if (event.clipboardData) {
+        event.clipboardData.setData("text/plain", "👍 You got hacked!");
+      } else if (window.clipboardData) {
+          // For older IE
+          
+        window.clipboardData.setData("Text", "👍 You got hacked!");
+      }
+    });
+  </script>
+</body>
+</html>
