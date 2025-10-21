@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Animated Folder To-Do (localStorage)</title>
+<style>
+  :root{
+    --folder-front:#5b3bff;
+    --folder-back:#7a61ff;
+    --card:#ffffff;
+    --muted:#9aa0b4;
+    --bg:#000000;
+  }
+  html,body{
+    height:100%;
+    margin:0;
+    background:var(--bg);
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    color:#e9edf5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* Container */
+  .stage{
+    width:520px;
+    max-width:94vw;
+    height:360px;
+    position:relative;
+    perspective:1200px;
+  }
+
+  /* The checklist card behind the folder */
+  .checkcard{
+    position:absolute;
+    left:50%;
+    top:30px;
+    transform:translateX(-50%);
+    width:420px;
+    padding:20px;
+    border-radius:12px;
+    background:linear-gradient(180deg,#ffffff 0%, #fbfbfd 100%);
+    color:#111827;
+    box-shadow:0 20px 50px rgba(0,0,0,0.6);
+    z-index:1;
+    transition:transform 600ms cubic-bezier(.2,.9,.25,1);
+    transform-origin:top center;
+  }
+
+  .checkcard.small{
+    transform:translateX(-50%) translateY(40px) scale(0.96);
+    opacity:0.95;
+  }
+
+  .checkcard h3{
+    margin:0 0 8px 0;
+    font-size:20px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .checkcard .sub{
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  .tasks{
+    margin-top:14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .task{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 12px;
+    border-radius:10px;
+    background:rgba(15,23,42,0.02);
+    transition:all 220ms ease;
+    cursor:pointer;
+    user-select:none;
+  }
+
+  .task:hover{ transform:translateY(-3px); box-shadow:0 6px 18px rgba(2,6,23,0.06); }
+
+  .checkbox{
+    width:20px;height:20px;border-radius:6px;border:2px solid #d1d5db;display:flex;align-items:center;justify-content:center;background:#fff;
+  }
+  .checkbox.checked{
+    background:linear-gradient(135deg,#60a5fa,#6366f1);
+    border:0;
+    color:white;
+  }
+
+  .task .title{ font-size:14px; font-weight:600; color:#0f1724; }
+  .task .meta{ margin-left:auto; font-size:12px; color:var(--muted); }
+
+  /* Folder */
+  .folder-wrap{
+    position:absolute;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%);
+    width:420px;
+    height:150px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:2;
+    pointer-events:none; /* pointer events go to children */
+  }
+
+  /* folder back part (shadow / back) */
+  .folder-back{
+    position:absolute;
+    width:420px;
+    height:130px;
+    border-radius:16px;
+    top:0;
+    left:0;
+    background:linear-gradient(180deg,var(--folder-back), #5f49ff);
+    transform-origin:top center;
+    transform:translateY(12px) rotateX(12deg) skewX(-2deg);
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+    pointer-events:auto;
+  }
+
+  /* folder front flap that opens */
+  .folder-front{
+    position:relative;
+    width:420px;
+    height:120px;
+    border-radius:14px;
+    background:linear-gradient(180deg,var(--folder-front), #4a2fff);
+    transform-origin:top center;
+    transform:translateY(0) rotateX(0deg);
+    transition:transform 700ms cubic-bezier(.22,.9,.3,1), box-shadow 300ms;
+    box-shadow:0 18px 40px rgba(0,0,0,0.6);
+    pointer-events:auto;
+    cursor:pointer;
+    overflow:visible;
+  }
+
+  /* subtle highlight */
+  .folder-front::before{
+    content:"";
+    position:absolute;left:12px;right:12px;top:10px;height:48px;border-radius:10px;
+    background:linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+    filter:blur(10px);opacity:0.9;
+  }
+
+  .folder-front.open{
+    transform:translateY(-98px) rotateX(50deg) scale(1.02);
+    box-shadow:0 40px 80px rgba(0,0,0,0.7);
+  }
+
+  /* folder content text */
+  .folder-content{
+    position:absolute;
+    left:20px;top:20px;
+    color:white;
+    font-weight:800;
+    letter-spacing:0.2px;
+  }
+  .folder-content .title{ font-size:28px; display:flex; align-items:center; gap:10px; }
+  .folder-content .subtitle{ font-weight:500; font-size:12px; color:rgba(255,255,255,0.9); margin-top:6px; }
+
+  /* controls (add new item) */
+  .controls{
+    position:absolute;
+    right:14px;
+    bottom:12px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+    pointer-events:auto;
+  }
+  .controls input[type="text"]{
+    padding:10px 12px;
+    border-radius:999px;
+    border:0;
+    outline:none;
+    font-size:13px;
+    width:220px;
+  }
+  .controls select{
+    padding:10px 8px; border-radius:10px; border:0; outline:none; font-size:13px;
+  }
+  .controls button{
+    padding:10px 12px;border-radius:10px;border:0;cursor:pointer;font-weight:700;
+    background:white;color:#111827;
+  }
+
+  /* small hint text */
+  .hint{
+    position:absolute; left:14px; bottom:14px; font-size:12px; color:rgba(255,255,255,0.9);
+  }
+
+  /* small responsive */
+  @media (max-width:520px){
+    .controls input[type="text"]{ width:140px; }
+    .stage{ height:420px; }
+    .folder-front.open{ transform:translateY(-90px) rotateX(50deg) scale(0.98); }
+  }
+
+  /* color badges for tasks */
+  .color-dot{ width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle;border:2px solid rgba(255,255,255,0.85); }
+  .task.checked .title{ text-decoration:line-through; color:#6b7280; font-weight:600; }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="checkcard small" id="checkcard" role="region" aria-label="To do list card">
+      <h3>Things to do today <span class="sub">• Notes &amp; Files</span></h3>
+      <div class="tasks" id="tasksList" aria-live="polite">
+        <!-- JS fills tasks -->
+      </div>
+    </div>
+
+    <div class="folder-wrap" id="folderWrap">
+      <div class="folder-back" aria-hidden="true"></div>
+
+      <div class="folder-front" id="folderFront" role="button" aria-pressed="false" tabindex="0" title="Click to open/close folder">
+        <div class="folder-content">
+          <div class="title">Projects 🐶</div>
+          <div class="subtitle">Notes &amp; files — <span id="fileCount">0</span> files</div>
+        </div>
+
+        <div class="hint">Click folder to open</div>
+
+        <div class="controls" id="controls" aria-hidden="false">
+          <input id="newText" placeholder="Add new task..." aria-label="New task text" />
+          <select id="colorSelect" aria-label="Task color">
+            <option value="#60a5fa">Blue</option>
+            <option value="#34d399">Green</option>
+            <option value="#f59e0b">Amber</option>
+            <option value="#f97316">Orange</option>
+            <option value="#ef4444">Red</option>
+          </select>
+          <button id="addBtn" aria-label="Add task">Add</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  // DOM refs
+  const folder = document.getElementById('folderFront');
+  const checkcard = document.getElementById('checkcard');
+  const tasksList = document.getElementById('tasksList');
+  const fileCount = document.getElementById('fileCount');
+  const newText = document.getElementById('newText');
+  const addBtn = document.getElementById('addBtn');
+  const colorSelect = document.getElementById('colorSelect');
+
+  // Key localStorage key
+  const STORAGE_KEY = "animated_folder_tasks_v1";
+
+  // sample initial tasks
+  const defaultTasks = [
+    { id: cryptoRandomId(), text: "Design new homepage", checked: false, color: "#60a5fa"},
+    { id: cryptoRandomId(), text: "Brainstorm ideas for logo", checked: true, color: "#f59e0b"},
+    { id: cryptoRandomId(), text: "Reply to client feedback", checked: true, color: "#34d399"},
+    { id: cryptoRandomId(), text: "Upload final design assets", checked: false, color: "#f97316"}
+  ];
+
+  // Load tasks from storage or defaults
+  let tasks = loadTasks();
+
+  function loadTasks(){
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) return JSON.parse(raw);
+    } catch(e){}
+    // deep copy defaults
+    return defaultTasks.map(t => ({...t}));
+  }
+
+  function saveTasks(){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); } catch(e){}
+  }
+
+  function render(){
+    tasksList.innerHTML = "";
+    tasks.forEach(t => {
+      const node = document.createElement('div');
+      node.className = 'task' + (t.checked ? ' checked' : '');
+      node.tabIndex = 0;
+      node.setAttribute('data-id', t.id);
+      node.setAttribute('role','button');
+      node.setAttribute('aria-pressed', t.checked ? 'true' : 'false');
+
+      node.innerHTML = `
+        <div class="checkbox ${t.checked ? 'checked' : ''}" aria-hidden="true">
+          ${t.checked ? '&#10003;' : ''}
+        </div>
+        <div style="display:flex;align-items:center">
+          <span class="color-dot" style="background:${t.color}"></span>
+          <div class="title">${escapeHtml(t.text)}</div>
+        </div>
+        <div class="meta">${t.checked ? 'Done' : 'Pending'}</div>
+      `;
+
+      // click toggles
+      node.addEventListener('click', () => toggleTask(t.id));
+      node.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTask(t.id); }});
+
+      tasksList.appendChild(node);
+    });
+
+    fileCount.textContent = tasks.length;
+    saveTasks();
+  }
+
+  function toggleTask(id){
+    const idx = tasks.findIndex(x => x.id === id);
+    if(idx === -1) return;
+    tasks[idx].checked = !tasks[idx].checked;
+    render();
+  }
+
+  function addTask(text, color){
+    if(!text || !text.trim()) return;
+    tasks.unshift({ id: cryptoRandomId(), text: text.trim(), checked: false, color: color || '#60a5fa' });
+    newText.value = "";
+    render();
+    // automatically open folder when adding
+    openFolder(true);
+  }
+
+  // folder open state
+  let opened = false;
+  function openFolder(instant=false){
+    opened = true;
+    folder.classList.add('open');
+    folder.setAttribute('aria-pressed','true');
+    checkcard.classList.remove('small');
+  }
+  function closeFolder(){
+    opened = false;
+    folder.classList.remove('open');
+    folder.setAttribute('aria-pressed','false');
+    checkcard.classList.add('small');
+  }
+  function toggleFolder(){
+    opened ? closeFolder() : openFolder();
+  }
+
+  // button events
+  folder.addEventListener('click', toggleFolder);
+  folder.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFolder(); }});
+
+  addBtn.addEventListener('click', () => addTask(newText.value, colorSelect.value));
+  newText.addEventListener('keypress', (e) => { if(e.key === 'Enter') addTask(newText.value, colorSelect.value); });
+
+  // initial render
+  render();
+
+  // open folder briefly on load to show effect
+  setTimeout(() => { openFolder(); setTimeout(() => closeFolder(), 1800); }, 600);
+
+  // helpers
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  function cryptoRandomId(){
+    // nice short id
+    return 'id_' + Math.random().toString(36).slice(2,9);
+  }
+
+  // expose for debugging (optional)
+  window.afolder = { openFolder, closeFolder, toggleFolder, getTasks: () => tasks, addTask };
+
+})();
+</script>
+</body>
+</html>
