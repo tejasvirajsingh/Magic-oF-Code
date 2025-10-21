@@ -17,5 +17,4 @@ copyBtn.addEventListener("click", () => {
   setTimeout(() => (copyBtn.textContent = "Copy Code"), 1000);
 });
 
-// Generate one color on page load
 generateColor();
