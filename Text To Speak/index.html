@@ -27,13 +27,32 @@
         transition: 0.3s;  
     }
 
-    button{
-        padding: 10px;
-        font-size: 18px;
-        margin: 10px;
-        background-color: rgb(155, 160, 161);
-        cursor: pointer;
-    }
+   button {
+    padding: 10px 15px;
+    font-size: 15px;
+    margin: 10px;
+
+    background-color: rgb(6, 190, 92);
+    border: none;
+    border-radius: 50px;       /* round shape */
+    cursor: pointer;
+
+    box-shadow: 0 4px 10px rgba(223, 16, 16, 0.2);
+    transition: all 0.3s ease;  /* smooth animation */
+}
+
+/* Hover animation */
+button:hover {
+    transform: translateY(-5px);       /* button lifts up */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    background-color: rgb(14, 228, 67);
+}
+
+/* Click animation */
+button:active {
+    transform: scale(0.92);            /* small press animation */
+}
+
 
     footer{
         width: 100%;                  
@@ -49,28 +68,56 @@
 <body>
 
     <input type="text" id="text" placeholder="Write to Speak" />
-
-    <button id="speakBtn">📢</button>
+   <br>
+    <button id="speakBtn">Speak</button>
 
     <footer><b>Made By Mr. Max ❤️</b></footer>
 
 <script>
+    let voices = [];
+
+    // Load voices
+    function loadVoices() {
+        voices = speechSynthesis.getVoices();
+
+        // Try to find an Indian Female Voice
+        preferredVoice = voices.find(v =>
+            (v.lang.includes("hi-IN") || v.lang.includes("en-IN")) &&
+            (v.name.toLowerCase().includes("female") ||
+             v.name.toLowerCase().includes("heera") ||
+             v.name.toLowerCase().includes("neerja") ||
+             v.name.toLowerCase().includes("priya"))
+        );
+    }
+
+    speechSynthesis.onvoiceschanged = loadVoices;
+
     function speakText() {
         const msg = new SpeechSynthesisUtterance(text.value);
+
+        if (preferredVoice) {
+            msg.voice = preferredVoice;   // Apply Indian female voice
+        }
+
+        msg.rate = 1;      // speaking speed
+        msg.pitch = 1;     // normal tone
+
         speechSynthesis.speak(msg);
-        text.value = "";       // clear input after speaking
-        text.focus();          // bring cursor back to input
+
+        text.value = "";   // clear text
+        text.focus();      // auto-focus for next input
     }
 
     document.getElementById("speakBtn").onclick = speakText;
 
-    // ✅ PRESS ENTER to trigger speak
+    // ENTER key to speak
     document.getElementById("text").addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
             speakText();
         }
     });
 </script>
+
 
 </body>
 </html>
