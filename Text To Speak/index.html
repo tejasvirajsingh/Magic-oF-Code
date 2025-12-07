@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text To Speak</title>
+    
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;  
+        justify-content: center; 
+        height: 100vh;  
+        background: #12e1ec;
+    }
+
+    input  {
+        padding: 10px;
+        font-size: 15px;
+        margin: 10px;
+        background-color: rgb(208, 215, 217);
+        border: 2px solid #0d0d0c;       
+        border-radius: 10px;           
+        outline: none;                 
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);  
+        transition: 0.3s;  
+    }
+
+    button{
+        padding: 10px;
+        font-size: 18px;
+        margin: 10px;
+        background-color: rgb(155, 160, 161);
+        cursor: pointer;
+    }
+
+    footer{
+        width: 100%;                  
+        text-align: center;
+        padding: 40px 0;
+        color: #141313;               
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+</style>
+
+</head>
+<body>
+
+    <input type="text" id="text" placeholder="Write to Speak" />
+
+    <button id="speakBtn">📢</button>
+
+    <footer><b>Made By Mr. Max ❤️</b></footer>
+
+<script>
+    function speakText() {
+        const msg = new SpeechSynthesisUtterance(text.value);
+        speechSynthesis.speak(msg);
+        text.value = "";       // clear input after speaking
+        text.focus();          // bring cursor back to input
+    }
+
+    document.getElementById("speakBtn").onclick = speakText;
+
+    // ✅ PRESS ENTER to trigger speak
+    document.getElementById("text").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            speakText();
+        }
+    });
+</script>
+
+</body>
+</html>
