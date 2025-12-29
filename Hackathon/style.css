@@ -109,6 +109,8 @@ body {
 .primary:hover {
   background: #caffbf;
   color: #064635;
+  box-shadow:0 0 20px rgb(0, 0, 0);
+  transition:.3s;
 }
 
 .secondary {
@@ -120,7 +122,11 @@ body {
 .secondary:hover {
   background: #caffbf;
   color: #064635;
+   box-shadow:0 0 10px rgb(0, 0, 0);
+  transition:.3s;
 }
+
+
 
 /* Stats */
 .stats {
