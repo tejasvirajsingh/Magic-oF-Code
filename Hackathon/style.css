@@ -29,7 +29,15 @@ body {
 }
 
 .navbar a:hover {
-  color: #caffbf;
+   
+    
+   
+    transition:.3s;
+    transform:scale(1.3);
+    
+    display:inline-block;
+  
+
 }
 
 /* Floating Leaves */
