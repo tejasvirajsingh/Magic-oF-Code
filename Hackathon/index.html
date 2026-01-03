@@ -25,7 +25,7 @@
 
   <section class="hero">
     <div class="hero-box">
-      <h1>AI-Powered Crop Health Diagnosis</h1>
+      <h1>AI-Powered Leaf Health Diagnosis</h1>
       <p>
         Detect plant diseases instantly using smartphone images
         and artificial intelligence...
@@ -37,12 +37,46 @@
     </div>
   </section>
 
+
   <section class="stats">
-    <div class="stat">🌱 30+ Crop Diseases</div>
-    <div class="stat">🤖 AI-Based Detection</div>
+    <div class="stat" onclick="openSection('uploadSection')">🌱 30+ Crop Diseases</div>
+<div class="stat" onclick="openSection('aiSection')">🤖 AI-Based Detection</div>
+
     <div class="stat">📱 Mobile Friendly</div>
     <div class="stat">⚡ Instant Results</div>
   </section>
+
+
+<section id="uploadSection" class="upload-section">
+  <h2>Upload Diseased Leaf🍃</h2>
+  <br>
+  <br>
+  
+ 
+  <label class="file-upload">
+  📤 Choose Leaf Image
+  <input type="file" accept="image/*" onchange="previewLeaf(event)">
+</label>
+
+<p id="fileName"></p>
+
+  <img id="leafPreview">
+  <br><br>
+  <button class="analyze-btn" > Analyze Leaf</button>
+</section>
+
+<!-- Ai based section -->
+
+
+<section id="aiSection" class="upload-section">
+  <h2>How AI-Based Detection Works 🤖</h2>
+  <p>
+    Our AI model analyzes leaf color, texture, and patterns
+    to identify crop diseases with high accuracy.
+  </p>
+</section>
+
+
 
   <footer>
    Smart Agriculture with AI <br> © 2025 LeafLife.ai  <br>
