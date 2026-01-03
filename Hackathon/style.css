@@ -68,7 +68,7 @@ body {
 /* Floating Leaves */
 .leaves span {
   position: absolute;
-  
+  will-change:transform;
   width: 20px;
   height: 20px;
   background: rgba(202, 255, 191, 0.6);
@@ -76,6 +76,23 @@ body {
   animation: float 4s linear infinite;
   top: -10%;
 }
+
+@media (max-width: 768px) {
+  .leaves span {
+    animation-duration: 7s;   /* slower = smoother */
+    opacity: 0.4;
+  }
+
+  /* show fewer leaves on mobile */
+  .leaves span:nth-child(n+4) {
+    display: none;
+  }
+}
+
+
+
+
+
 
 .leaves span:nth-child(1) { left: 10%; animation-delay: 0s; }
 .leaves span:nth-child(2) { left: 30%; animation-delay: 2s; }
@@ -498,5 +515,34 @@ border-radius:20px;
   .about-image img {
     width: 220px;
     margin-top: 20px;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-box h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-box p {
+    font-size: 0.95rem;
+  }
+
+  .about-container {
+    flex-direction: column;
+  }
+
+  .about-image img {
+    width: 200px;
+  }
+
+  .team-card:hover {
+    transform: none; /* disable hover zoom on mobile */
   }
 }
