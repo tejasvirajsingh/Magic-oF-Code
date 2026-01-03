@@ -45,3 +45,11 @@ function previewLeaf(event) {
 function analyzeLeaf() {
   alert("🧠 AI is analyzing the leaf...\n(Demo result will be shown)");
 }
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector(".navbar");
+  if (window.scrollY > 10) {
+    nav.style.boxShadow = "0 6px 20px rgba(0,0,0,0.4)";
+  } else {
+    nav.style.boxShadow = "none";
+  }
+});
