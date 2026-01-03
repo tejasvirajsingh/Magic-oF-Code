@@ -11,6 +11,7 @@ body {
   overflow-x: hidden;
 }
 
+
 /* Navbar */
 .navbar {
   display: flex;
@@ -47,7 +48,7 @@ body {
   height: 20px;
   background: rgba(202, 255, 191, 0.6);
   border-radius: 50% 0;
-  animation: float 10s linear infinite;
+  animation: float 4s linear infinite;
   top: -10%;
 }
 
@@ -107,10 +108,22 @@ body {
 }
 
 .primary:hover {
-  background: #caffbf;
+  background: #abb4a9;
   color: #064635;
   box-shadow:0 0 20px rgb(0, 0, 0);
   transition:.3s;
+
+  
+    
+    transform:scale(1.1);
+    
+    display:inline-block;
+  
+
+
+
+
+
 }
 
 .secondary {
@@ -120,10 +133,19 @@ body {
 }
 
 .secondary:hover {
-  background: #caffbf;
+  background: #abb4a9;
   color: #064635;
    box-shadow:0 0 10px rgb(0, 0, 0);
   transition:.3s;
+
+
+  
+   
+    transform:scale(1.1);
+    
+    display:inline-block;
+  
+
 }
 
 
@@ -146,6 +168,75 @@ body {
 .stat:hover {
   transform: translateY(-8px);
 }
+
+
+
+
+.upload-section {
+display: none;
+max-width: 500px;
+margin: 80px auto;
+padding: 30px;
+text-align: center;
+background: rgba(255,255,255,0.1);
+border-radius:20px;
+}
+
+.analyze-btn {
+  background: linear-gradient(135deg, #00ff99, #00cc7a);
+  color: #0f3d2e;
+  border: none;
+  padding: 14px 35px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 255, 153, 0.4);
+  transition: all 0.3s ease;
+}
+
+.analyze-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 255, 153, 0.6);
+}
+
+.analyze-btn:active {
+  transform: scale(0.95);
+}
+
+.file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  background: rgba(13, 15, 14, 0.15);
+  color: #eaf9f3;
+  
+  
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hide default input */
+.file-upload input {
+  display: none;
+}
+
+/* Hover effect */
+.file-upload:hover {
+  background: rgba(0, 255, 153, 0.3);
+  transform: scale(1.05);
+}
+
+
+#leafPreview {
+  display: none;
+  max-width: 100%;
+  margin-top: 20px;
+  margin-top: 20px;
+  border-radius: 15px;
+}
+
+
 
 /* Footer */
 footer {
