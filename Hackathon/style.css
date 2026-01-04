@@ -148,6 +148,14 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
+/* mobile view friendly... */
+@media (max-width: 600){
+  .hero-buttons{
+    flex-direction: column;
+  }
+}
+
+
 .hero-btns button {
   padding: 14px 35px;
   margin: 10px;
