@@ -249,6 +249,18 @@ background: rgba(255,255,255,0.1);
 border-radius:20px;
 }
 
+.upload-section img,
+.ai-img{
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
 .analyze-btn {
   background: linear-gradient(135deg, #00ff99, #00cc7a);
   color: #0f3d2e;
