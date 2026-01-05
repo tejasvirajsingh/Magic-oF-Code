@@ -470,16 +470,16 @@ border-radius:20px;
 /* Floating Source Code Button */
 .source-code-btn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 55px;
-  height: 55px;
-  background: #000;
+  bottom: 10px;
+  right: 10px;
+  width: 35px;
+  height: 35px;
+  background: #0f0f0f;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(7, 7, 7, 0.4);
   z-index: 9999;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -491,7 +491,7 @@ border-radius:20px;
 }
 
 .source-code-btn:hover {
-  transform: scale(1.15);
+  transform: scale(1.10);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
