@@ -461,6 +461,45 @@ border-radius:20px;
   box-shadow: 0 15px 35px rgba(0,255,153,0.35);
 }
 
+
+
+
+
+/* floating buttom */
+
+/* Floating Source Code Button */
+.source-code-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  background: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.source-code-btn img {
+  width: 28px;
+  height: 28px;
+  filter: invert(1);
+}
+
+.source-code-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+
+
+
+
+
 /* footer side effect and give margin */
 
 
