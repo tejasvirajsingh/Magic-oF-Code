@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ultimate CSS Cheat Sheet</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --yellow:#fff59d;
+  --blue:#e3f2fd;
+  --green:#e8f5e9;
+  --pink:#fce4ec;
+  --line:#d1d1d1;
+}
+body{
+  background:#555;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.page{
+  background:#fff;
+  width:900px;
+  padding:50px;
+  margin-bottom:30px;
+  box-shadow:0 0 20px rgba(0,0,0,.3);
+  background-image:linear-gradient(var(--line) 1px,transparent 1px);
+  background-size:100% 26px;
+  line-height:26px;
+}
+h1{text-align:center;font-size:36px;margin:0}
+h1 span{background:var(--yellow);padding:0 15px;border-radius:5px}
+h2{font-size:20px;margin:20px 0 10px;display:flex;align-items:center}
+h2::before{content:"🎨";margin-right:10px}
+h2 span{background:var(--yellow);padding:0 10px}
+.section{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  border:1px solid #ddd;
+  padding:15px;
+  border-radius:10px;
+  background:rgba(255,255,255,.9);
+}
+.prop{font-weight:bold;color:#1a237e}
+.val{color:#c62828;font-style:italic}
+.arrow{color:#2e7d32;font-weight:bold;margin:0 5px}
+.box-blue{background:var(--blue)}
+.box-green{background:var(--green)}
+.box-pink{background:var(--pink)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{border-bottom:2px solid #333;background:#eee}
+td{border-bottom:1px solid #ccc;padding:2px 0}
+@media print{
+ body{background:none}
+ .page{box-shadow:none;width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+<h1><span>CSS COMPLETE NOTES & PROPERTIES</span> 🚀</h1>
+<p style="text-align:center"><i>Handwritten Style – Easy to Remember</i></p>
+
+<!-- CSS BASICS -->
+<h2><span>1. CSS BASICS</span></h2>
+<div class="section">
+<div>
+<div><span class="prop">CSS</span> ➔ Cascading Style Sheets</div>
+<div>Controls <b>design & layout</b></div>
+<div>Works with HTML</div>
+</div>
+<div>
+<div><span class="prop">Syntax:</span></div>
+<div><span class="prop">selector</span> { <span class="prop">property</span>: <span class="val">value</span>; }</div>
+<div>Example: <span class="prop">color</span>: <span class="val">red</span>;</div>
+</div>
+</div>
+
+<!-- CSS TYPES -->
+<h2><span>2. TYPES OF CSS</span></h2>
+<div class="section box-blue">
+<div>
+<div><span class="prop">Inline CSS</span></div>
+<div>style="color:red"</div>
+</div>
+<div>
+<div><span class="prop">Internal CSS</span></div>
+<div>&lt;style&gt; inside &lt;head&gt;</div>
+</div>
+<div>
+<div><span class="prop">External CSS</span></div>
+<div>style.css file</div>
+</div>
+</div>
+
+<!-- SELECTORS -->
+<h2><span>3. CSS SELECTORS</span></h2>
+<div class="section box-green">
+<div>
+<div>* ➔ Universal</div>
+<div>p ➔ Element</div>
+<div>.box ➔ Class</div>
+<div>#id ➔ ID</div>
+</div>
+<div>
+<div>div p ➔ Descendant</div>
+<div>div > p ➔ Child</div>
+<div>:hover ➔ Pseudo</div>
+<div>::before ➔ Pseudo-element</div>
+</div>
+</div>
+
+<!-- COLORS & BACKGROUND -->
+<h2><span>4. COLORS & BACKGROUND</span></h2>
+<div class="section">
+<div>
+<div>color</div>
+<div>background-color</div>
+<div>background-image</div>
+<div>background-repeat</div>
+</div>
+<div>
+<div>background-size</div>
+<div>background-position</div>
+<div>linear-gradient()</div>
+<div>rgba()</div>
+</div>
+</div>
+
+<!-- TEXT -->
+<h2><span>5. TEXT & FONT</span></h2>
+<div class="section box-blue">
+<div>
+<div>color</div>
+<div>font-size</div>
+<div>font-family</div>
+<div>font-weight</div>
+</div>
+<div>
+<div>text-align</div>
+<div>text-decoration</div>
+<div>text-transform</div>
+<div>line-height</div>
+</div>
+</div>
+
+<!-- BOX MODEL -->
+<h2><span>6. BOX MODEL</span></h2>
+<div class="section box-pink">
+<div>
+<div>content</div>
+<div>padding</div>
+</div>
+<div>
+<div>border</div>
+<div>margin</div>
+</div>
+</div>
+
+<!-- BORDER -->
+<h2><span>7. BORDER & SHADOW</span></h2>
+<div class="section">
+<div>
+<div>border</div>
+<div>border-radius</div>
+</div>
+<div>
+<div>box-shadow</div>
+<div>outline</div>
+</div>
+</div>
+
+<!-- DISPLAY & POSITION -->
+<h2><span>8. DISPLAY & POSITION</span></h2>
+<div class="section box-green">
+<div>
+<div>display: block</div>
+<div>display: inline</div>
+<div>display: flex</div>
+</div>
+<div>
+<div>position: static</div>
+<div>relative</div>
+<div>absolute</div>
+<div>fixed</div>
+</div>
+</div>
+
+<!-- FLEXBOX -->
+<h2><span>9. FLEXBOX</span></h2>
+<div class="section box-blue">
+<div>
+<div>display: flex</div>
+<div>flex-direction</div>
+<div>justify-content</div>
+</div>
+<div>
+<div>align-items</div>
+<div>flex-wrap</div>
+<div>gap</div>
+</div>
+</div>
+
+<!-- GRID -->
+<h2><span>10. CSS GRID</span></h2>
+<div class="section">
+<div>
+<div>display: grid</div>
+<div>grid-template-columns</div>
+<div>grid-template-rows</div>
+</div>
+<div>
+<div>gap</div>
+<div>grid-column</div>
+<div>grid-row</div>
+</div>
+</div>
+
+<!-- TRANSFORM & ANIMATION -->
+<h2><span>11. TRANSFORM & ANIMATION</span></h2>
+<div class="section box-pink">
+<div>
+<div>transform</div>
+<div>rotate()</div>
+<div>scale()</div>
+</div>
+<div>
+<div>transition</div>
+<div>@keyframes</div>
+<div>animation</div>
+</div>
+</div>
+
+<!-- RESPONSIVE -->
+<h2><span>12. RESPONSIVE DESIGN</span></h2>
+<div class="section box-green">
+<div>
+<div>@media query</div>
+<div>max-width</div>
+</div>
+<div>
+<div>min-width</div>
+<div>vw / vh</div>
+</div>
+</div>
+
+<!-- Z-INDEX -->
+<h2><span>13. VISIBILITY & LAYER</span></h2>
+<div class="section">
+<div>
+<div>opacity</div>
+<div>visibility</div>
+</div>
+<div>
+<div>z-index</div>
+<div>overflow</div>
+</div>
+</div>
+
+<div style="margin-top:30px;text-align:center;border-top:2px dashed #333">
+💡 <b>Pro Tip:</b> Master Flexbox + Grid = 90% CSS done
+</
