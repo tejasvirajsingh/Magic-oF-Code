@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ultimate HTML5 Master Cheat Sheet</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --yellow:#fff59d;
+  --blue:#e3f2fd;
+  --green:#e8f5e9;
+  --pink:#fce4ec;
+  --line:#d1d1d1;
+}
+body{
+  background:#555;
+  font-family:'gans',cursive;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.page{
+  background:#fff;
+  width:900px;
+  padding:50px;
+  margin-bottom:30px;
+  box-shadow:0 0 20px rgba(0,0,0,.3);
+  background-image:linear-gradient(var(--line) 1px,transparent 1px);
+  background-size:100% 26px;
+  line-height:26px;
+}
+h1{text-align:center;font-size:36px;margin:0}
+h1 span{background:var(--yellow);padding:0 15px;border-radius:5px}
+h2{font-size:20px;margin:20px 0 10px;display:flex;align-items:center}
+h2::before{content:"⭐";margin-right:10px}
+h2 span{background:var(--yellow);padding:0 10px}
+.section{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  border:1px solid #ddd;
+  padding:15px;
+  border-radius:10px;
+  background:rgba(255,255,255,.9);
+}
+.tag{font-weight:bold;color:#1a237e}
+.attr{color:#c62828;font-style:italic}
+.arrow{color:#2e7d32;font-weight:bold;margin:0 5px}
+.box-blue{background:var(--blue)}
+.box-green{background:var(--green)}
+.box-pink{background:var(--pink)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{border-bottom:2px solid #333;background:#eee}
+td{border-bottom:1px solid #ccc;padding:2px 0}
+@media print{
+ body{background:none}
+ .page{box-shadow:none;width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+<h1><span>HTML5 TAGS & ATTRIBUTES </span> 🚀</h1>
+<p style="text-align:center"><i>All Tags • All Attributes • With Examples</i></p>
+
+<!-- DOCUMENT -->
+<h2><span>1. DOCUMENT STRUCTURE</span></h2>
+<div class="section">
+<div>
+<div><span class="tag">&lt;!DOCTYPE html&gt;</span> ➔ HTML5 declaration</div>
+<div><span class="tag">&lt;html lang="en"&gt;</span> ➔ Root + language</div>
+<div><span class="tag">&lt;head&gt;</span> ➔ Metadata container</div>
+<div><span class="tag">&lt;body&gt;</span> ➔ Visible content</div>
+</div>
+<div>
+<div><span class="tag">&lt;meta charset="UTF-8"&gt;</span> ➔ Encoding</div>
+<div><span class="tag">&lt;meta name="viewport"&gt;</span> ➔ Responsive</div>
+<div><span class="tag">&lt;title&gt;</span> ➔ Tab title</div>
+<div><span class="tag">&lt;base&gt;</span> ➔ Base URL</div>
+</div>
+</div>
+
+<!-- TEXT -->
+<h2><span>2. TEXT & FORMATTING</span></h2>
+<div class="section box-blue">
+<div>
+<div><span class="tag">&lt;h1&gt;–&lt;h6&gt;</span> ➔ Headings</div>
+<div><span class="tag">&lt;p&gt;</span> ➔ Paragraph</div>
+<div><span class="tag">&lt;br&gt;</span> ➔ Line break</div>
+<div><span class="tag">&lt;hr&gt;</span> ➔ Horizontal rule</div>
+<div><span class="tag">&lt;pre&gt;</span> ➔ Preformatted</div>
+</div>
+<div>
+<div><span class="tag">&lt;b&gt;</span>/<span class="tag">&lt;strong&gt;</span> ➔ Bold</div>
+<div><span class="tag">&lt;i&gt;</span>/<span class="tag">&lt;em&gt;</span> ➔ Italic</div>
+<div><span class="tag">&lt;mark&gt;</span> ➔ Highlight</div>
+<div><span class="tag">&lt;small&gt;</span> ➔ Small text</div>
+<div><span class="tag">&lt;sub&gt;</span>/<span class="tag">&lt;sup&gt;</span></div>
+</div>
+</div>
+
+<!-- LINKS MEDIA -->
+<h2><span>3. LINKS & MEDIA</span></h2>
+<div class="section box-green">
+<div>
+<div><span class="tag">&lt;a href=""&gt;</span> ➔ Link</div>
+<div><span class="attr">target="_blank"</span></div>
+<div><span class="attr">download</span></div>
+<div><span class="tag">&lt;img src="" alt=""&gt;</span></div>
+</div>
+<div>
+<div><span class="tag">&lt;audio controls&gt;</span></div>
+<div><span class="tag">&lt;video controls&gt;</span></div>
+<div><span class="tag">&lt;source&gt;</span></div>
+<div><span class="tag">&lt;iframe&gt;</span></div>
+</div>
+</div>
+
+<!-- LISTS -->
+<h2><span>4. LISTS</span></h2>
+<div class="section">
+<div>
+<div><span class="tag">&lt;ul&gt;</span> ➔ Unordered</div>
+<div><span class="tag">&lt;ol&gt;</span> ➔ Ordered</div>
+<div><span class="tag">&lt;li&gt;</span> ➔ List item</div>
+</div>
+<div>
+<div><span class="tag">&lt;dl&gt;</span> ➔ Description list</div>
+<div><span class="tag">&lt;dt&gt;</span> ➔ Term</div>
+<div><span class="tag">&lt;dd&gt;</span> ➔ Description</div>
+</div>
+</div>
+
+<!-- TABLE -->
+<h2><span>5. TABLE TAGS</span></h2>
+<table class="box-pink">
+<tr><th>Tag</th><th>Purpose</th></tr>
+<tr><td>&lt;table&gt;</td><td>Table wrapper</td></tr>
+<tr><td>&lt;tr&gt;</td><td>Row</td></tr>
+<tr><td>&lt;th&gt;</td><td>Header</td></tr>
+<tr><td>&lt;td&gt;</td><td>Cell</td></tr>
+<tr><td>&lt;thead&gt;</td><td>Header group</td></tr>
+<tr><td>&lt;tbody&gt;</td><td>Body group</td></tr>
+<tr><td>&lt;tfoot&gt;</td><td>Footer group</td></tr>
+<tr><td>colspan / rowspan</td><td>Merge cells</td></tr>
+</table>
+
+<!-- FORMS -->
+<h2><span>6. FORMS & INPUT TYPES</span></h2>
+<div class="section">
+<div>
+<div>&lt;form action="" method=""&gt;</div>
+<div>&lt;input type="text"&gt;</div>
+<div>&lt;input type="password"&gt;</div>
+<div>&lt;input type="email"&gt;</div>
+<div>&lt;input type="number"&gt;</div>
+<div>&lt;input type="date"&gt;</div>
+</div>
+<div>
+<div>&lt;input type="radio"&gt;</div>
+<div>&lt;input type="checkbox"&gt;</div>
+<div>&lt;input type="file"&gt;</div>
+<div>&lt;textarea&gt;</div>
+<div>&lt;select&gt;&lt;option&gt;</div>
+<div>&lt;button&gt;</div>
+</div>
+</div>
+
+<!-- SEMANTIC -->
+<h2><span>7. SEMANTIC TAGS</span></h2>
+<div class="section box-blue">
+<div>
+<div>&lt;header&gt;</div>
+<div>&lt;nav&gt;</div>
+<div>&lt;main&gt;</div>
+<div>&lt;section&gt;</div>
+<div>&lt;article&gt;</div>
+</div>
+<div>
+<div>&lt;aside&gt;</div>
+<div>&lt;footer&gt;</div>
+<div>&lt;figure&gt;</div>
+<div>&lt;figcaption&gt;</div>
+<div>&lt;address&gt;</div>
+</div>
+</div>
+
+<!-- INTERACTIVE -->
+<h2><span>8. INTERACTIVE & EMBED</span></h2>
+<div class="section box-green">
+<div>
+<div>&lt;details&gt;</div>
+<div>&lt;summary&gt;</div>
+<div>&lt;dialog&gt;</div>
+</div>
+<div>
+<div>&lt;canvas&gt;</div>
+<div>&lt;svg&gt;</div>
+<div>&lt;embed&gt;</div>
+<div>&lt;object&gt;</div>
+</div>
+</div>
+
+<!-- GLOBAL ATTR -->
+<h2><span>9. GLOBAL ATTRIBUTES</span></h2>
+<table>
+<tr><th>Attribute</th><th>Example</th></tr>
+<tr><td>id</td><td>id="box"</td></tr>
+<tr><td>class</td><td>class="card"</td></tr>
+<tr><td>style</td><td>style="color:red"</td></tr>
+<tr><td>title</td><td>title="tooltip"</td></tr>
+<tr><td>hidden</td><td>hidden</td></tr>
+<tr><td>contenteditable</td><td>true</td></tr>
+<tr><td>data-*</td><td>data-id="5"</td></tr>
+<tr><td>tabindex</td><td>tabindex="1"</td></tr>
+</table>
+
+<div style="margin-top:30px;text-align:center;border-top:2px dashed #333">
+💡 <b>Made by:</b>Mr Max ❤️
+</div>
+
+</div>
+</body>
+</html>
